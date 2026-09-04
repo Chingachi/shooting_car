@@ -1,3 +1,6 @@
-﻿public interface IData
+﻿namespace Data
 {
+    public interface IData
+    {
+    }
 }

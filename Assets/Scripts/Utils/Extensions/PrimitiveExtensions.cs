@@ -1,4 +1,4 @@
-﻿namespace Core.Utils.Extensions
+﻿namespace Utils.Extensions
 {
     public static class PrimitiveExtensions
     {

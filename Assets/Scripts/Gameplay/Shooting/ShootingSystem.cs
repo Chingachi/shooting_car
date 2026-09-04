@@ -1,29 +1,77 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Data;
+using Pools.Interfaces;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using Zenject;
 
-namespace Gameplay
+namespace Gameplay.Shooting
 {
     public class ShootingSystem : MonoBehaviour
     {
         [SerializeField]
         private Transform _turret;
         [SerializeField]
+        private Transform _projectileSpawnPoint;
+        [SerializeField]
         private float _maxRotationAngle = 45;
 
-        private Touchscreen _touchscreen;
+        private EventSystem _eventSystem;
+        private PlayerData _playerData;
+        private IPool<Projectile> _projectilePool;
 
         private float _targetAngle;
         private float _halfWidth;
 
+        private Touchscreen _touchscreen;
+
+        private CancellationTokenSource _cts;
+
+
         [Inject]
-        private EventSystem _eventSystem;
+        private void Construct(EventSystem eventSystem, PlayerData playerData, IPool<Projectile> projectilePool)
+        {
+            _eventSystem = eventSystem;
+            _playerData = playerData;
+            _projectilePool = projectilePool;
+        }
 
         private void Start()
         {
             _halfWidth = Screen.width / 2f;
+            _cts = new CancellationTokenSource();
+            StartShooting(_cts.Token).Forget();
+        }
+
+        private void OnDestroy()
+        {
+            _cts.Dispose();
+        }
+
+        private async UniTaskVoid StartShooting(CancellationToken token)
+        {
+            try
+            {
+                while(!token.IsCancellationRequested)
+                {
+                    Shoot();
+                    await UniTask.WaitForSeconds(_playerData.FireRate, cancellationToken: token);
+                }
+            } catch(OperationCanceledException)
+            {
+
+            }
+        }
+
+        private void Shoot()
+        {
+            Projectile projectile = _projectilePool.Get();
+            projectile.transform.position = _projectileSpawnPoint.position;
+
         }
 
         private void Update()

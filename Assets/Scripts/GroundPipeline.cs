@@ -1,5 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
+using Gameplay;
 using UnityEngine;
 using Zenject;
 public class GroundPipeline : MonoBehaviour
@@ -29,10 +31,16 @@ public class GroundPipeline : MonoBehaviour
 
     private async UniTaskVoid TrackCar(CancellationToken token)
     {
-        while(!token.IsCancellationRequested)
+        try
         {
-            await UniTask.WaitForSeconds(CAR_CHECK_PERIOD_IN_SECONDS, cancellationToken: token);
-            SetupChunksUpToCar();
+            while(!token.IsCancellationRequested)
+            {
+                await UniTask.WaitForSeconds(CAR_CHECK_PERIOD_IN_SECONDS, cancellationToken: token);
+                SetupChunksUpToCar();
+            }
+        } catch(OperationCanceledException)
+        {
+
         }
     }
 
