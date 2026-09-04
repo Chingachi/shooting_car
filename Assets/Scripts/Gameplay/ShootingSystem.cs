@@ -1,0 +1,70 @@
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using Zenject;
+
+namespace Gameplay
+{
+    public class ShootingSystem : MonoBehaviour
+    {
+        [SerializeField]
+        private Transform _turret;
+        [SerializeField]
+        private float _maxRotationAngle = 45;
+
+        private Touchscreen _touchscreen;
+
+        private float _targetAngle;
+        private float _halfWidth;
+
+        [Inject]
+        private EventSystem _eventSystem;
+
+        private void Start()
+        {
+            _halfWidth = Screen.width / 2f;
+        }
+
+        private void Update()
+        {
+            ReadInput();
+        }
+
+        private void ReadInput()
+        {
+            _touchscreen ??= Touchscreen.current;
+
+            if(_touchscreen == null)
+            {
+                return;
+            }
+
+            TouchControl touch = _touchscreen.primaryTouch;
+
+            if(!touch.press.isPressed)
+            {
+                return;
+            }
+
+            int touchId = touch.touchId.ReadValue();
+            bool touchIsOverUI = _eventSystem.IsPointerOverGameObject(touchId);
+
+            if(touchIsOverUI)
+            {
+                return;
+            }
+
+            HandleTouch(touch);
+        }
+
+        private void HandleTouch(TouchControl touch)
+        {
+            Vector2 screenPosition = touch.position.ReadValue();
+            float xPosition = screenPosition.x - _halfWidth;
+            float xPositionPercents = xPosition / _halfWidth;
+            xPositionPercents = Mathf.Clamp(xPositionPercents, -1.0f, 1.0f);
+            _turret.rotation = Quaternion.Euler(0, xPositionPercents * _maxRotationAngle, 0);
+        }
+    }
+}
