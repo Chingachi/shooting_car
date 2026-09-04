@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
-namespace Core.EventSystemComponents
+
+namespace EventsManager
 {
     public class EventManager
     {
         private readonly Dictionary<Type, Delegate> _events = new Dictionary<Type, Delegate>();
 
-        public void Subscribe<T> (Action<T> action)
-            where T : struct, IEvent
+        public void Subscribe<T>(Action<T> action) where T : struct, IEvent
         {
             Type type = typeof(T);
 
-            if (!_events.ContainsKey(type))
+            if(!_events.ContainsKey(type))
             {
                 _events[type] = null;
             }
@@ -19,16 +19,15 @@ namespace Core.EventSystemComponents
             _events[type] = Delegate.Combine(_events[type], action);
         }
 
-        public void Unsubscribe<T> (Action<T> action)
-            where T : struct, IEvent
+        public void Unsubscribe<T>(Action<T> action) where T : struct, IEvent
         {
             Type type = typeof(T);
 
-            if (_events.TryGetValue(type, out Delegate eventValue))
+            if(_events.TryGetValue(type, out Delegate eventValue))
             {
                 eventValue = Delegate.Remove(eventValue, action);
 
-                if (eventValue == null)
+                if(eventValue == null)
                 {
                     _events.Remove(type);
                 } else
@@ -38,10 +37,9 @@ namespace Core.EventSystemComponents
             }
         }
 
-        public void Fire<T> (T eventData)
-            where T : struct, IEvent
+        public void Fire<T>(T eventData) where T : struct, IEvent
         {
-            if (_events.TryGetValue(typeof(T), out Delegate action))
+            if(_events.TryGetValue(typeof(T), out Delegate action))
             {
                 ((Action<T>)action)(eventData);
             }
