@@ -210,6 +210,7 @@ MonoBehaviour:
   - {fileID: 1659523823}
   - {fileID: 655128019}
   - {fileID: 1841720578}
+  - {fileID: 1421292944}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -243,6 +244,7 @@ Transform:
   - {fileID: 1659523824}
   - {fileID: 655128020}
   - {fileID: 1841720577}
+  - {fileID: 1421292945}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
@@ -610,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca62d9c7d1a416eb6e8fb40060fdb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Installers.GameplayInstaller
-  _car: {fileID: 0}
+  _car: {fileID: 7779234463021258179}
   _eventSystem: {fileID: 1946725251}
 --- !u!4 &655128020
 Transform:
@@ -795,6 +797,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b8061406480655458be5c290f522e52, type: 3}
+--- !u!1 &1421292943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421292945}
+  - component: {fileID: 1421292944}
+  m_Layer: 0
+  m_Name: Resolver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1421292944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421292943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d111e443a92b45ef8227a7a6601a9e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Resolver.ResolverSceneInstaller
+--- !u!4 &1421292945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421292943}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.62537, y: 0, z: 20.07547}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 116507747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1659523822
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1111,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3127054211769293250, guid: 429cbc14fddc0d440acc2c887039a67c, type: 3}
   m_PrefabInstance: {fileID: 7779234463021258175}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7779234463021258179 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 747720959420753498, guid: 429cbc14fddc0d440acc2c887039a67c, type: 3}
+  m_PrefabInstance: {fileID: 7779234463021258175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46f61c386904ca7a27c5183411cc67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Car
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

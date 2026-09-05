@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.ShootingSystem
   _turret: {fileID: 8794500243388974974}
   _projectileSpawnPoint: {fileID: 1644353960566069892}
+  _turretCenter: {fileID: 0}
   _maxRotationAngle: 45
 --- !u!1001 &9045178710863650965
 PrefabInstance:

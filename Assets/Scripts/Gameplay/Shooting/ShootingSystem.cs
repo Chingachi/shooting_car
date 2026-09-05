@@ -71,7 +71,8 @@ namespace Gameplay.Shooting
         {
             Projectile projectile = _projectilePool.Get();
             projectile.transform.position = _projectileSpawnPoint.position;
-
+            Vector3 direction = new Vector3(_turret.forward.x, 0, _turret.forward.z).normalized;
+            projectile.Shoot(direction);
         }
 
         private void Update()

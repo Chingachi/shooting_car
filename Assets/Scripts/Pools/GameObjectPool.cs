@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Pools
 {
-    public abstract class GameObjectPool<T> : IPool<T> where T : Poolable
+    public class GameObjectPool<T> : IPool<T> where T : Poolable
     {
         protected readonly ContainerResolver _resolver;
         protected readonly GameObject _container;
