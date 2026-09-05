@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data;
 using Pools.Interfaces;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -22,6 +23,7 @@ namespace Gameplay.Shooting
 
         private EventSystem _eventSystem;
         private PlayerData _playerData;
+        private GameConfigSo _gameConfig;
         private IPool<Projectile> _projectilePool;
 
         private float _targetAngle;
@@ -33,10 +35,11 @@ namespace Gameplay.Shooting
 
 
         [Inject]
-        private void Construct(EventSystem eventSystem, PlayerData playerData, IPool<Projectile> projectilePool)
+        private void Construct(EventSystem eventSystem, PlayerData playerData, GameConfigSo gameConfig, IPool<Projectile> projectilePool)
         {
             _eventSystem = eventSystem;
             _playerData = playerData;
+            _gameConfig = gameConfig;
             _projectilePool = projectilePool;
         }
 
@@ -59,7 +62,7 @@ namespace Gameplay.Shooting
                 while(!token.IsCancellationRequested)
                 {
                     Shoot();
-                    await UniTask.WaitForSeconds(_playerData.FireRate, cancellationToken: token);
+                    await UniTask.WaitForSeconds(_gameConfig.BaseFireRateTime, cancellationToken: token);
                 }
             } catch(OperationCanceledException)
             {

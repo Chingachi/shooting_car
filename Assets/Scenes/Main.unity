@@ -885,6 +885,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 116507747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1715946975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1715946976}
+  - component: {fileID: 1715946977}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1715946976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715946975}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2033982073}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1715946977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715946975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d9b12e3ecfd4abba8d5d561b8ae439a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Enemies.EnemyManager
 --- !u!1 &1841720576
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pools.PoolsInstaller
   _poolables:
   - {fileID: 1290738796313281216, guid: 54e76484d100d0345b52d546d534c7f9, type: 3}
+  - {fileID: 582845455524135358, guid: 09a68edab9a11624096394568a6a6ef6, type: 3}
 --- !u!1 &1946725249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,6 +1092,7 @@ Transform:
   - {fileID: 553297625}
   - {fileID: 330585546}
   - {fileID: 7779234463021258176}
+  - {fileID: 1715946976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7779234463021258175

@@ -1,5 +1,6 @@
 ﻿using Pools;
 using Pools.Interfaces;
+using ScriptableObjects;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
@@ -8,11 +9,12 @@ namespace Gameplay.Shooting
 {
     public class Projectile : Poolable
     {
-        private const float SPEED = 100;
         [SerializeField]
         private ProjectileModel _projectileModel;
         [SerializeField]
         private Rigidbody _rigidbody;
+        [Inject]
+        private GameConfigSo _gameConfig;
         [Inject]
         private IPool<Projectile> _pool;
 
@@ -21,7 +23,7 @@ namespace Gameplay.Shooting
 
         private void Start()
         {
-            _projectileModel.OnBecomeInvisibleEvent += HandleBecomeInvisible;
+            _projectileModel.OnBecomeInvisibleEvent += Despawn;
         }
 
         public void Shoot(Vector3 direction)
@@ -40,6 +42,11 @@ namespace Gameplay.Shooting
             _rigidbody.angularVelocity = Vector3.zero;
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            Despawn();
+        }
+
         private void FixedUpdate()
         {
             if(!_hasBeenShot)
@@ -47,11 +54,11 @@ namespace Gameplay.Shooting
                 return;
             }
 
-            Vector3 nextPosition = _rigidbody.position + _direction.normalized * (SPEED * Time.fixedDeltaTime);
+            Vector3 nextPosition = _rigidbody.position + _direction.normalized * (_gameConfig.BaseProjectileSpeed * Time.fixedDeltaTime);
             _rigidbody.MovePosition(nextPosition);
         }
 
-        private void HandleBecomeInvisible()
+        private void Despawn()
         {
             if(_pool == null)
             {
